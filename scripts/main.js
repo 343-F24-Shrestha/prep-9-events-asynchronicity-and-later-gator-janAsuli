@@ -22,11 +22,9 @@ const output = document.querySelector("output");
 
 // when the input has focus and enter is pressed, invoke the function named later
 input.addEventListener("keydown", (ev) => {
-  console.debug("keydown", ev.key);
-  if (ev.key === "Enter") {
-    console.log("Enter detected. current value:", input.value);
-    // TODO use the provided later() function here
-  }
+    if (ev.key === "Enter") {
+	later(input.value, setOutput);
+    }
 });
 
 // when you have the result from this function, update(replace) the content of the output element with the result formatted as:
@@ -38,8 +36,8 @@ input.addEventListener("keydown", (ev) => {
 
 //
 const setOutput = (result) => {
-  console.log("setOutput", result);
-  // TODO see comments just above 🙄
+    console.log("setOutput", result);
+    output.textContent = `${result.valediction}, ${result.target}`
 };
 
 // for Part 2
