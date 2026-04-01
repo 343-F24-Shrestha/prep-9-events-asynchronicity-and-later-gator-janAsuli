@@ -23,7 +23,7 @@ const output = document.querySelector("output");
 // when the input has focus and enter is pressed, invoke the function named later
 input.addEventListener("keydown", (ev) => {
     if (ev.key === "Enter") {
-	later(input.value, setOutput);
+	options(makeOptions, input.value)
     }
 });
 
@@ -46,3 +46,23 @@ const setOutput = (result) => {
 // (if the user hasn't entered anything, simply exclude the query argument in your invocation to options).
 // add each of the resulting target options as buttons in list items in the ul.
 // when any of these buttons are clicked, user the later() function to request the corresponding valediction and update the output element as in Part 1
+function makeOptions(gwuh) {
+    const availableTargets = document.querySelector("#available-targets");
+    for (const availableTarget of availableTargets.children) {
+	const index = gwuh.indexOf(availableTarget.textContent);
+	if (index == -1) {
+	    continue;
+	}
+	gwuh.splice(index, 1);
+    }
+    for (const target of gwuh) {
+	const elem = document.createElement("li");
+	const btn = document.createElement("button");
+	btn.textContent = target;
+	btn.addEventListener("click", function() {
+	    later(btn.textContent, setOutput);
+	})
+	elem.appendChild(btn);
+	availableTargets.appendChild(elem);
+    }
+}
